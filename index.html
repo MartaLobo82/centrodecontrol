@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Centro de Control</title>
+<meta name="theme-color" content="#7462a3">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Centro">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="iconos/32.png">
+<link rel="apple-touch-icon" href="iconos/180.png">
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="centro.css">
+</head>
+<body>
+<div class="app" id="app">
+  <nav class="rail" id="rail" aria-label="Secciones">
+    <div class="logo" title="Centro de Control">C</div>
+    <button data-vista="inicio"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Inicio</button>
+    <button data-vista="libros"><svg viewBox="0 0 24 24"><path d="M4 4h4v16H4zM10 4h4v16h-4z"/><path d="m16 5 3.8-1 3 15.4-3.8 1z"/></svg>Libros</button>
+    <button data-vista="kdp"><svg viewBox="0 0 24 24"><path d="M3 17l5-6 4 4 4-7 5 9"/><path d="M3 21h18"/></svg>KDP</button>
+    <button data-vista="ingresos"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15 8.5a3.5 3.5 0 0 0-3-1.5c-2 0-3 1.1-3 2.3 0 3 6 1.7 6 4.9 0 1.3-1.2 2.3-3 2.3a3.6 3.6 0 0 1-3.2-1.7M12 5.5V7M12 17v1.5"/></svg>Ingresos</button>
+    <button data-vista="gastos"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h3"/></svg>Gastos</button>
+    <button data-vista="impuestos"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/></svg>Impuestos</button>
+    <button data-vista="informe"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 14v3M12 13v4M16 15v2"/></svg>Informe</button>
+    <button data-vista="ajustes" class="abajo"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Ajustes</button>
+  </nav>
+  <main id="main">
+    <section class="vista" id="v-inicio"></section>
+    <section class="vista" id="v-libros"></section>
+    <section class="vista" id="v-kdp"></section>
+    <section class="vista" id="v-ingresos"></section>
+    <section class="vista" id="v-gastos"></section>
+    <section class="vista" id="v-impuestos"></section>
+    <section class="vista" id="v-informe"></section>
+    <section class="vista" id="v-ajustes"></section>
+  </main>
+</div>
+<button class="fab" id="fab" title="Añadir" aria-label="Añadir"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+<div id="avisos" aria-live="polite"></div>
+<script src="base.js"></script>
+<script src="datos.js"></script>
+<script src="comun.js"></script>
+<script src="lector-excel.js"></script>
+<script src="v-inicio.js"></script>
+<script src="v-libros.js"></script>
+<script src="v-kdp.js"></script>
+<script src="v-ingresos.js"></script>
+<script src="v-gastos.js"></script>
+<script src="v-impuestos.js"></script>
+<script src="v-informe.js"></script>
+<script src="v-ajustes.js"></script>
+<script src="google.js"></script>
+<script src="arranque.js"></script>
+</body>
+</html>

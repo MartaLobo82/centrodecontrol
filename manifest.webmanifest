@@ -1,0 +1,22 @@
+{
+  "name": "Centro de Control",
+  "short_name": "Centro",
+  "description": "Tu negocio de autora: libros, ventas de Amazon, ingresos, gastos e impuestos.",
+  "lang": "es",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f2ea",
+  "theme_color": "#7462a3",
+  "launch_handler": { "client_mode": "focus-existing" },
+  "shortcuts": [
+    { "name": "Subir informe de KDP", "url": "./index.html#kdp" },
+    { "name": "Nuevo gasto", "url": "./index.html#gastos" },
+    { "name": "Impuestos", "url": "./index.html#impuestos" }
+  ],
+  "icons": [
+    { "src": "iconos/192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "iconos/512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "iconos/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
