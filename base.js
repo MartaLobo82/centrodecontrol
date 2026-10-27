@@ -1,6 +1,6 @@
 'use strict';
 // =====================================================================
-//  Planner — piezas básicas: atajos, fechas, guardado en el navegador,
+//  Centro de Control — piezas básicas: atajos, fechas, guardado en el navegador,
 //  ventanas, avisos y cambio de sección.
 // =====================================================================
 

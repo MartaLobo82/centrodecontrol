@@ -18,7 +18,7 @@ function datosVacios() {
     ajustes: {
       objetivo: 30000, saldoInicial: 0, kenpTasa: 0.0042, kenpTasas: {},
       cambios: { EUR: 1, USD: 0.8662, GBP: 1.1715, JPY: 0.0054, CAD: 0.622, AUD: 0.6125, MXN: 0.0508, BRL: 0.168, INR: 0.0091, SEK: 0.0909, PLN: 0.2323 },
-      fechaCambios: '', nombreFiscal: 'Marta Lobo', nif: '', actividad: 'Autora - venta de libros (digital/papel) y derechos de autor',
+      fechaCambios: '', nombreFiscal: '', nif: '', actividad: 'Autora - venta de libros (digital/papel) y derechos de autor',
       irpfIngresos: 15, ivaGastos: 21, ivaVentaDirecta: 0, pctPagoFraccionado: 20, mesesCobroKdp: 2,
       copiaDias: 7, tema: 'auto',
     },

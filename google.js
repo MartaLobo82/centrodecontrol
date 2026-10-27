@@ -137,7 +137,7 @@ function tarjetaGoogle() {
     : `<p style="margin-top:0">Guarda el Centro de Control en tu Google Drive (en una carpeta privada de la app) para tenerlo igual en el móvil y en el ordenador.</p>
       <button class="btn prim" id="gg-on"${GG.clientId ? '' : ' disabled'}>Conectar con Google Drive</button>`}
     <details style="margin-top:12px"${GG.clientId ? '' : ' open'}><summary class="suave" style="cursor:pointer">${GG.clientId ? 'Configuración de Google' : 'Antes de conectar: configurar Google (una sola vez)'}</summary>
-      <p class="suave" style="font-size:13px">Sirve el mismo ID de cliente que uses para Novelia y el Planner: las tres apps viven en la misma web.</p>
+      <p class="suave" style="font-size:13px">Si ya tienes un ID de cliente de Google para otra app en esta misma web, puedes usar el mismo.</p>
       <ol class="suave pasos-g">
         <li>Entra en <b>console.cloud.google.com</b> con tu cuenta y crea un proyecto (o usa el de tus otras apps).</li>
         <li>En «APIs y servicios» › «Biblioteca», habilita <b>Google Drive API</b>.</li>

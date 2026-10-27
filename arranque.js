@@ -4,7 +4,7 @@
 //  abajo en el móvil), atajos, copia automática y modo sin conexión.
 // =====================================================================
 
-const VERSION_APP = '1.0';
+const VERSION_APP = '1.1';
 
 (async function arrancar() {
   try { D = await Store.get('datos'); } catch (e) { console.error(e); }
@@ -80,7 +80,7 @@ const VERSION_APP = '1.0';
 function bienvenida() {
   modal(`<div class="bienvenida"><div class="logo-grande">C</div><h3>Tu Centro de Control, ahora como app</h3>
     <p class="suave">Libros, ventas de Amazon (subiendo el informe tal cual), ingresos, venta directa, gastos, impuestos y el informe del año. Funciona sin conexión y se instala en el móvil.</p>
-    <p class="suave">¿Tienes el archivo <b>centro-importar.json</b> que te preparó Claude con tus datos del Excel?</p></div>
+    <p class="suave">Si tienes un archivo <b>centro-importar.json</b> con tus datos de Excel, cárgalo; si no, empieza en blanco: crea tus libros y sube tu primer informe de KDP.</p></div>
     <div class="pie" style="flex-wrap:wrap"><button class="btn" data-cerrar>Empezar en blanco</button><button class="btn prim" id="bv-imp">Cargar mis datos del Excel</button></div>`, {
     alAbrir: (m, cerrar) => {
       $('#bv-imp', m).onclick = () => { cerrar(); elegirArchivo((j) => { if (!j || j.app !== 'centro' || !j.datos) return aviso('Ese archivo no es del Centro de Control'); importarDatos(j, 'sustituir'); aplicarTema(); aviso('¡Listo! Ya tienes aquí tus datos del Excel'); irA('inicio'); }); };
