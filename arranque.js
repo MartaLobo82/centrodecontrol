@@ -4,7 +4,7 @@
 //  abajo en el móvil), atajos, copia automática y modo sin conexión.
 // =====================================================================
 
-const VERSION_APP = '1.2';
+const VERSION_APP = '1.3';
 
 (async function arrancar() {
   try { D = await Store.get('datos'); } catch (e) { console.error(e); }

@@ -42,8 +42,10 @@ async function api(url, opts = {}) {
   const t = await pedirToken(false);
   const r = await fetch(url, { ...opts, headers: { Authorization: 'Bearer ' + t, ...(opts.headers || {}) } });
   if (r.status === 401) { GG.token = null; localStorage.removeItem('centro:token'); throw new Error('token'); }
-  if (r.status === 403) throw new Error('permiso');
-  if (!r.ok) throw new Error('google ' + r.status);
+  if (!r.ok) {
+    let detalle = ''; try { const j = await r.clone().json(); detalle = (j.error && (j.error.message || j.error.status)) || ''; } catch (e) {}
+    const err = new Error(r.status === 403 ? 'permiso' : 'google ' + r.status); err.detalle = `${r.status}${detalle ? ' · ' + detalle : ''}`; throw err;
+  }
   return r;
 }
 const hayToken = () => GG.token && GG.caduca > Date.now() + 30000;
@@ -95,7 +97,7 @@ async function sincronizar(manual) {
   } catch (e) {
     const m = e.message;
     estadoSincro(m === 'falta-id' ? 'Falta configurar' : /token|popup|cancel|access_denied|interaction/.test(m) ? 'Toca para conectar' : !navigator.onLine ? 'Sin conexión' : 'No se ha podido');
-    if (manual) aviso(m === 'falta-id' ? 'Falta el ID de cliente de Google (Ajustes)' : 'No he podido sincronizar. Vuelve a intentarlo.');
+    if (manual) aviso(m === 'falta-id' ? 'Falta el ID de cliente de Google (Ajustes)' : 'No he podido sincronizar: ' + motivoGoogle(e));
   } finally { GG.ocupado = false; }
 }
 function conflicto(remoto) {
@@ -103,8 +105,8 @@ function conflicto(remoto) {
   modal(`<h3>Hay cambios en los dos sitios</h3><p class="suave">Has cambiado cosas aquí y en otro aparato (el ${esc(f)}). No puedo juntarlas, así que dime con cuál me quedo. La otra te la descargo como copia, para que no pierdas nada.</p>
     <div class="pie" style="flex-wrap:wrap"><button class="btn" data-cerrar>Ahora no</button><button class="btn" id="sc-otro">Lo del otro aparato</button><button class="btn prim" id="sc-este">Lo de este aparato</button></div>`, {
     alAbrir: (m, cerrar) => {
-      $('#sc-este', m).onclick = async () => { cerrar(); try { GG.ocupado = true; const r = await api(`https://www.googleapis.com/drive/v3/files/${remoto.id}?alt=media`); descargar(await r.blob(), `Centro de Control · lo del otro aparato ${hoy()}.json`); await subir(remoto); aviso('Guardado lo de este aparato'); } catch (e) { aviso('No he podido subirlo'); } finally { GG.ocupado = false; estadoSincro(''); } };
-      $('#sc-otro', m).onclick = async () => { cerrar(); try { await hacerCopia('lo de este aparato'); await traerRemoto(remoto); aviso('Traído lo del otro aparato'); } catch (e) { aviso('No he podido traerlo'); } };
+      $('#sc-este', m).onclick = async () => { cerrar(); try { GG.ocupado = true; const r = await api(`https://www.googleapis.com/drive/v3/files/${remoto.id}?alt=media`); descargar(await r.blob(), `Centro de Control · lo del otro aparato ${hoy()}.json`); await subir(remoto); aviso('Guardado lo de este aparato'); } catch (e) { console.error(e); aviso('No he podido subirlo: ' + motivoGoogle(e)); } finally { GG.ocupado = false; estadoSincro(''); } };
+      $('#sc-otro', m).onclick = async () => { cerrar(); try { await hacerCopia('lo de este aparato'); await traerRemoto(remoto); aviso('Traído lo del otro aparato'); } catch (e) { console.error(e); aviso('No he podido traerlo: ' + motivoGoogle(e)); } };
     }
   });
 }
@@ -179,4 +181,15 @@ function arrancarGoogle() {
   }
   setInterval(() => { if (!document.hidden && hayToken()) sincronizar(); }, 120000);
   document.addEventListener('visibilitychange', () => { if (!document.hidden && hayToken()) sincronizar(); else if (document.hidden && GG.e.sucio && hayToken()) sincronizar(); });
+}
+
+// Explicación de un error de Google en palabras normales
+function motivoGoogle(e) {
+  const m = (e && e.message) || '';
+  if (m === 'falta-id') return 'falta el ID de cliente de Google (Ajustes)';
+  if (m === 'token' || /popup|interaction|cancel/.test(m)) return 'Google necesita que vuelvas a conectar: pulsa «☁» arriba y acepta';
+  if (/access_denied/.test(m)) return 'Google no ha dado permiso (¿has elegido la cuenta correcta y marcado la casilla de Drive?)';
+  if (m === 'permiso') return `Google no deja usar Drive con este permiso: desconecta en Ajustes y vuelve a conectar marcando la casilla de Google Drive (${(e.detalle || '403')})`;
+  if (!navigator.onLine) return 'no hay conexión';
+  return (e && e.detalle) ? `Google respondió ${e.detalle}` : m || 'error desconocido';
 }

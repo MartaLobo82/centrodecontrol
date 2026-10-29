@@ -1,6 +1,6 @@
 // Centro de Control — funciona sin conexión.
 // Sirve los archivos guardados y, si hay internet, se trae la versión nueva para la próxima vez.
-const VERSION = 'centro-v3';
+const VERSION = 'centro-v4';
 const ARCHIVOS = ['./', './index.html', './app.css', './centro.css', './base.js', './datos.js', './comun.js', './lector-excel.js', './v-inicio.js', './v-libros.js', './v-kdp.js',
   './v-ingresos.js', './v-gastos.js', './v-impuestos.js', './v-informe.js', './v-ajustes.js', './google.js', './arranque.js',
   './manifest.webmanifest', './iconos/32.png', './iconos/180.png', './iconos/192.png', './iconos/512.png'];

@@ -97,8 +97,9 @@ function aviso(texto, accion) {
   const a = el('div', { class: 'aviso' }, el('span', {}, texto));
   if (accion) a.append(el('button', { onclick: () => { accion.fn(); a.remove(); } }, accion.t));
   $('#avisos').append(a);
-  setTimeout(() => a.classList.add('fuera'), accion ? 6000 : 3200);
-  setTimeout(() => a.remove(), accion ? 6500 : 3700);
+  const dura = accion ? 6000 : texto.length > 60 ? 9000 : 3200;
+  setTimeout(() => a.classList.add('fuera'), dura);
+  setTimeout(() => a.remove(), dura + 500);
 }
 
 // ---------- ventanas ----------
